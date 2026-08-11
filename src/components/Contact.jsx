@@ -17,7 +17,7 @@ export const Contact = () => {
       <div className="container">
         <div className="section-header">
           <span className="section-label">GET IN TOUCH</span>
-          <h2 className="section-title font-serif">Contact Information</h2>
+          <h2 className="section-title font-serif">Contact Me</h2>
           <p className="section-subtitle">
             Feel free to reach out for internship opportunities, project collaborations, or technical inquiries.
           </p>

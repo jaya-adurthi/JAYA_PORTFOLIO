@@ -4,7 +4,6 @@ import { portfolioData } from '../data/portfolioData';
 export const Skills = () => {
   const { skills } = portfolioData;
 
-  // Flatten or organize all core 12 technologies cleanly
   const allTechnologies = [
     { name: "Python", category: "Programming" },
     { name: "JavaScript", category: "Programming" },
@@ -24,8 +23,8 @@ export const Skills = () => {
     <section id="skills" className="section skills-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">TECHNICAL PROFICIENCY</span>
-          <h2 className="section-title font-serif">Skills & Technologies</h2>
+          <span className="section-label">MY TOOLBELT</span>
+          <h2 className="section-title font-serif">Technical Skills</h2>
           <p className="section-subtitle">
             Core technologies, programming languages, and modern tools utilized in application development.
           </p>

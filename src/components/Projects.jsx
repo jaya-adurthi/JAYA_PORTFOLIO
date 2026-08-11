@@ -33,17 +33,17 @@ export const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="section projects-section">
       <div className="container">
-        {/* Editorial Section Header */}
+        {/* Section Header */}
         <div className="section-header">
-          <span className="section-label">FEATURED WORK</span>
-          <h2 className="section-title font-serif">Selected Case Studies</h2>
+          <span className="section-label">MY RECENT WORK</span>
+          <h2 className="section-title font-serif">Featured Projects</h2>
           <p className="section-subtitle">
-            Editorial showcase of web platforms, AI applications, and developer tools built with React and Python.
+            A selection of my recent work, web platforms, and AI applications built with React and Python.
           </p>
         </div>
 
-        {/* Editorial Showcase Blocks */}
-        <div className={`editorial-projects-stack ${isVisible ? 'animate-entrance' : ''}`}>
+        {/* 3 Projects Side-by-Side Grid Layout */}
+        <div className={`projects-grid-container ${isVisible ? 'animate-entrance' : ''}`}>
           {projects.map((project, index) => {
             const isFeatured = project.featured;
             const projectNum = `0${index + 1}`;
@@ -51,93 +51,91 @@ export const Projects = () => {
             return (
               <article
                 key={project.id}
-                className={`editorial-project-block glass-card ${isFeatured ? 'featured-block' : ''}`}
+                className={`project-grid-card glass-card ${isFeatured ? 'featured-card' : ''}`}
               >
-                <div className="project-grid-inner">
-                  {/* Left Column - Large Image / Video Preview Visual Banner */}
-                  <div className="project-visual-column">
-                    <div className="project-visual-frame">
-                      <img
-                        src={project.bannerImg}
-                        alt={project.title}
-                        className="project-banner-media"
-                      />
-                      <div className="editorial-media-overlay"></div>
-                      <span className="project-index-number font-serif">{projectNum}</span>
-                    </div>
+                {/* Top Visual Banner (40% Height) */}
+                <div className="card-media-wrapper">
+                  <img
+                    src={project.bannerImg}
+                    alt={project.title}
+                    className="card-banner-img"
+                  />
+                  <div className="media-overlay"></div>
+                  
+                  <div className="card-badge-row">
+                    <span className="category-chip">{project.subtitle}</span>
+                    {isFeatured && <span className="featured-pill font-serif">Featured</span>}
                   </div>
 
-                  {/* Right Column - Editorial Information & Actions */}
-                  <div className="project-info-column">
-                    <div className="project-meta-header">
-                      <span className="project-category-tag">{project.subtitle}</span>
-                      {isFeatured && <span className="featured-chip font-serif">Featured</span>}
-                    </div>
+                  <span className="card-index-num font-serif">{projectNum}</span>
+                </div>
 
-                    <h3 className="project-title font-serif">{project.title}</h3>
+                {/* Card Info & Content */}
+                <div className="card-body-content">
+                  <h3 className="card-project-title font-serif">{project.title}</h3>
 
-                    <p className="project-description">
-                      {project.description}
-                    </p>
+                  <p className="card-project-desc">
+                    {project.description}
+                  </p>
 
-                    {/* Tech stack thin labels */}
-                    <div className="project-tech-divider"></div>
-                    <div className="project-tech-labels">
-                      {project.techStack.map((tech) => (
-                        <span key={tech} className="tech-label-item">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="card-divider"></div>
 
-                    <div className="project-actions-divider"></div>
+                  {/* Tech stack labels */}
+                  <div className="card-tech-chips">
+                    {project.techStack.map((tech) => (
+                      <span key={tech} className="tech-chip-item">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
 
-                    {/* 3 Functional Action Buttons */}
-                    <div className="project-editorial-actions">
-                      {/* 1. Code / GitHub */}
+                  <div className="card-footer-divider"></div>
+
+                  {/* 3 Action Buttons */}
+                  <div className="card-action-buttons">
+                    {/* 1. Code / GitHub */}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary action-btn"
+                    >
+                      <Icon name="Github" size={14} />
+                      <span>CODE</span>
+                    </a>
+
+                    {/* 2. Live Demo / Website */}
+                    {project.liveUrl ? (
                       <a
-                        href={project.githubUrl}
+                        href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-secondary action-btn"
+                        className="btn btn-primary action-btn"
                       >
-                        <Icon name="Github" size={14} />
-                        <span>CODE</span>
+                        <Icon name="ExternalLink" size={14} />
+                        <span>{project.liveButtonText || 'LIVE DEMO'}</span>
                       </a>
-
-                      {/* 2. Live Demo / Website */}
-                      {project.liveUrl ? (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary action-btn"
-                        >
-                          <Icon name="ExternalLink" size={14} />
-                          <span>{project.liveButtonText || 'LIVE DEMO'}</span>
-                        </a>
-                      ) : (
-                        <button
-                          type="button"
-                          className="btn btn-disabled action-btn"
-                          disabled
-                        >
-                          <Icon name="ExternalLink" size={14} />
-                          <span>LIVE DEMO</span>
-                        </button>
-                      )}
-
-                      {/* 3. Demo Video */}
-                      <a
-                        href={project.demoVideoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline action-btn"
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-disabled action-btn"
+                        disabled
                       >
-                        <Icon name="Play" size={14} />
-                        <span>VIDEO</span>
-                      </a>
-                    </div>
+                        <Icon name="ExternalLink" size={14} />
+                        <span>LIVE DEMO</span>
+                      </button>
+                    )}
+
+                    {/* 3. Demo Video */}
+                    <a
+                      href={project.demoVideoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline action-btn"
+                    >
+                      <Icon name="Play" size={14} />
+                      <span>VIDEO</span>
+                    </a>
                   </div>
                 </div>
               </article>
@@ -151,63 +149,54 @@ export const Projects = () => {
           position: relative;
         }
 
-        .editorial-projects-stack {
-          display: flex;
-          flex-direction: column;
-          gap: 2.5rem;
+        /* 3 Side-by-Side Cards Desktop Grid */
+        .projects-grid-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .editorial-projects-stack.animate-entrance {
+        .projects-grid-container.animate-entrance {
           opacity: 1;
           transform: translateY(0);
         }
 
-        .editorial-project-block {
+        @media (min-width: 992px) {
+          .projects-grid-container {
+            grid-template-columns: repeat(3, 1fr);
+            align-items: stretch;
+          }
+        }
+
+        .project-grid-card {
           padding: 0;
           overflow: hidden;
-          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           border: 1px solid var(--border-color);
+          transition: all 0.3s ease;
         }
 
-        .editorial-project-block:hover {
+        .project-grid-card:hover {
           border-color: var(--border-dark);
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-md);
         }
 
-        .project-grid-inner {
-          display: grid;
-          grid-template-columns: 1fr;
-        }
-
-        @media (min-width: 992px) {
-          .project-grid-inner {
-            grid-template-columns: 1.15fr 1fr;
-          }
-        }
-
-        /* Visual Column */
-        .project-visual-column {
+        /* Top Media Banner */
+        .card-media-wrapper {
           position: relative;
-          background: var(--bg-secondary);
-          overflow: hidden;
-          min-height: 280px;
-        }
-
-        @media (min-width: 992px) {
-          .project-visual-column {
-            min-height: 380px;
-          }
-        }
-
-        .project-visual-frame {
-          position: relative;
+          height: 200px;
           width: 100%;
-          height: 100%;
+          overflow: hidden;
+          background: var(--bg-secondary);
         }
 
-        .project-banner-media {
+        .card-banner-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -215,118 +204,118 @@ export const Projects = () => {
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .editorial-project-block:hover .project-banner-media {
-          transform: scale(1.04);
+        .project-grid-card:hover .card-banner-img {
+          transform: scale(1.06);
         }
 
-        .editorial-media-overlay {
+        .media-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.65) 100%);
         }
 
-        .project-index-number {
+        .card-badge-row {
           position: absolute;
-          bottom: 1.25rem;
-          left: 1.5rem;
-          font-size: 3.5rem;
+          top: 1rem;
+          left: 1rem;
+          right: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          z-index: 2;
+        }
+
+        .category-chip {
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: #ffffff;
+          background: rgba(0, 0, 0, 0.6);
+          padding: 0.25rem 0.65rem;
+          border-radius: var(--radius-sm);
+          backdrop-filter: blur(6px);
+        }
+
+        .featured-pill {
+          font-size: 0.75rem;
+          font-style: italic;
+          color: var(--text-accent);
+          background: var(--bg-card);
+          padding: 0.2rem 0.6rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border-color);
+        }
+
+        .card-index-num {
+          position: absolute;
+          bottom: 0.75rem;
+          right: 1rem;
+          font-size: 2rem;
           font-weight: 700;
           color: rgba(255, 255, 255, 0.85);
           line-height: 1;
           z-index: 2;
         }
 
-        /* Info Column */
-        .project-info-column {
-          padding: 2.25rem;
+        /* Card Content Body */
+        .card-body-content {
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          flex: 1;
         }
 
-        @media (min-width: 768px) {
-          .project-info-column {
-            padding: 2.75rem;
-          }
-        }
-
-        .project-meta-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 0.75rem;
-        }
-
-        .project-category-tag {
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          color: var(--text-accent);
-        }
-
-        .featured-chip {
-          font-size: 0.8rem;
-          font-style: italic;
-          color: var(--text-secondary);
-        }
-
-        .project-title {
-          font-size: 1.85rem;
+        .card-project-title {
+          font-size: 1.45rem;
           font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 1rem;
+          margin-bottom: 0.65rem;
           line-height: 1.25;
         }
 
-        @media (min-width: 768px) {
-          .project-title {
-            font-size: 2.25rem;
-          }
-        }
-
-        .project-description {
-          font-size: 0.975rem;
+        .card-project-desc {
+          font-size: 0.925rem;
           color: var(--text-secondary);
-          line-height: 1.65;
-          margin-bottom: 1.25rem;
-        }
-
-        .project-tech-divider {
-          height: 1px;
-          background: var(--border-color);
+          line-height: 1.6;
           margin-bottom: 1rem;
         }
 
-        .project-tech-labels {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem 0.85rem;
-          margin-bottom: 1.75rem;
+        .card-divider {
+          height: 1px;
+          background: var(--border-color);
+          margin-top: auto;
+          margin-bottom: 0.85rem;
         }
 
-        .tech-label-item {
-          font-size: 0.8rem;
+        .card-tech-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem 0.65rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .tech-chip-item {
+          font-size: 0.775rem;
           font-weight: 500;
           color: var(--text-secondary);
         }
 
-        .project-actions-divider {
+        .card-footer-divider {
           height: 1px;
           background: var(--border-color);
-          margin-top: auto;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1rem;
         }
 
-        .project-editorial-actions {
+        .card-action-buttons {
           display: flex;
-          gap: 0.6rem;
-          flex-wrap: wrap;
+          gap: 0.4rem;
         }
 
         .action-btn {
           flex: 1;
-          min-width: 100px;
+          padding: 0.45rem 0.35rem;
+          font-size: 0.75rem;
         }
       `}</style>
     </section>

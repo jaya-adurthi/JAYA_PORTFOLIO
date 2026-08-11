@@ -8,8 +8,8 @@ export const About = () => {
     <section id="about" className="section about-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">ABOUT ME</span>
-          <h2 className="section-title font-serif">Academic & Engineering Focus</h2>
+          <span className="section-label">GET TO KNOW ME</span>
+          <h2 className="section-title font-serif">About Me</h2>
         </div>
 
         <div className="about-grid">
