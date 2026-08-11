@@ -1,42 +1,64 @@
 import React from 'react';
-import { Icon } from './Icons';
+import { portfolioData } from '../data/portfolioData';
 
 export const Skills = () => {
-  const techSkills = [
-    { name: 'Python', icon: 'Code', desc: 'Core Programming & AI Scripting' },
-    { name: 'Java', icon: 'Terminal', desc: 'Object-Oriented Fundamentals' },
-    { name: 'JavaScript', icon: 'FileCode', desc: 'Web App & ES6 Logic' },
-    { name: 'React.js', icon: 'Globe', desc: 'Frontend Framework & UI Components' },
-    { name: 'HTML', icon: 'Code', desc: 'Semantic Web Structure' },
-    { name: 'CSS', icon: 'Layers', desc: 'Modern Layouts & Styling' },
-    { name: 'SQL', icon: 'Database', desc: 'Relational Database Queries' },
-    { name: 'Streamlit', icon: 'Cpu', desc: 'Interactive AI & ML Web Apps' },
-    { name: 'Git', icon: 'Wrench', desc: 'Version Control System' },
-    { name: 'GitHub', icon: 'Github', desc: 'Repository Management & Collaboration' }
+  const { skills } = portfolioData;
+
+  // Flatten or organize all core 12 technologies cleanly
+  const allTechnologies = [
+    { name: "Python", category: "Programming" },
+    { name: "JavaScript", category: "Programming" },
+    { name: "C", category: "Programming" },
+    { name: "SQL", category: "Database" },
+    { name: "HTML", category: "Frontend" },
+    { name: "CSS", category: "Frontend" },
+    { name: "React.js", category: "Frontend" },
+    { name: "Vite", category: "Tools" },
+    { name: "Streamlit", category: "Frameworks" },
+    { name: "Git", category: "Version Control" },
+    { name: "GitHub", category: "Version Control" },
+    { name: "VS Code", category: "Tools" }
   ];
 
   return (
     <section id="skills" className="section skills-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Skills & Tech Stack</h2>
+          <span className="section-label">TECHNICAL PROFICIENCY</span>
+          <h2 className="section-title font-serif">Skills & Technologies</h2>
           <p className="section-subtitle">
-            Technologies, programming languages, and tools I use to build applications.
+            Core technologies, programming languages, and modern tools utilized in application development.
           </p>
         </div>
 
-        <div className="skills-tech-grid">
-          {techSkills.map((tech) => (
-            <div key={tech.name} className="glass-card skill-tech-card">
-              <div className="tech-icon-box">
-                <Icon name={tech.icon} size={22} />
-              </div>
-              <div className="tech-details">
-                <h3 className="tech-name">{tech.name}</h3>
-                <span className="tech-desc">{tech.desc}</span>
-              </div>
+        {/* Editorial Category Grid */}
+        <div className="skills-editorial-grid">
+          {skills.map((skillGroup, groupIdx) => (
+            <div key={groupIdx} className="skills-category-column glass-card">
+              <h3 className="category-title font-serif">{skillGroup.category}</h3>
+              <ul className="editorial-tech-list">
+                {skillGroup.items.map((item) => (
+                  <li key={item} className="editorial-tech-item">
+                    <span className="tech-bullet">—</span>
+                    <span className="tech-name">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
+        </div>
+
+        {/* Full Clean Minimalist Editorial Grid Bar */}
+        <div className="editorial-tech-bar">
+          <span className="tech-bar-label font-serif">Complete Stack Index</span>
+          <div className="tech-bar-items">
+            {allTechnologies.map((tech, idx) => (
+              <span key={tech.name} className="tech-bar-chip">
+                {tech.name}
+                {idx < allTechnologies.length - 1 && <span className="tech-bar-sep">/</span>}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -45,72 +67,108 @@ export const Skills = () => {
           position: relative;
         }
 
-        .skills-tech-grid {
+        .skills-editorial-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.15rem;
+          gap: 1.5rem;
+          margin-bottom: 2.5rem;
         }
 
-        @media (min-width: 576px) {
-          .skills-tech-grid {
+        @media (min-width: 768px) {
+          .skills-editorial-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
         @media (min-width: 992px) {
-          .skills-tech-grid {
-            grid-template-columns: repeat(5, 1fr);
+          .skills-editorial-grid {
+            grid-template-columns: repeat(4, 1fr);
           }
         }
 
-        .skill-tech-card {
+        .skills-category-column {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          gap: 0.85rem;
-          padding: 1.25rem;
-          height: 100%;
-          border: 1px solid var(--border-color);
-          background: var(--bg-card);
-          border-radius: var(--radius-md);
-          transition: all 0.25s ease;
+          gap: 1rem;
+          padding: 1.75rem;
         }
 
-        .skill-tech-card:hover {
-          background: var(--bg-card-hover);
-          border-color: var(--accent-blue);
-          transform: translateY(-3px);
-          box-shadow: var(--shadow-md);
+        .category-title {
+          font-size: 1.25rem;
+          color: var(--text-primary);
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid var(--border-color);
         }
 
-        .tech-icon-box {
+        .editorial-tech-list {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+        }
+
+        .editorial-tech-item {
           display: flex;
           align-items: center;
-          justify-content: center;
-          width: 42px;
-          height: 42px;
-          border-radius: var(--radius-md);
-          background: rgba(37, 99, 235, 0.1);
-          border: 1px solid rgba(37, 99, 235, 0.2);
-          color: var(--text-accent);
+          gap: 0.6rem;
+          font-size: 0.95rem;
+          color: var(--text-secondary);
         }
 
-        .tech-details {
-          display: flex;
-          flex-direction: column;
-          gap: 0.2rem;
+        .tech-bullet {
+          color: var(--text-accent);
+          font-weight: 400;
         }
 
         .tech-name {
-          font-size: 1.05rem;
-          font-weight: 700;
           color: var(--text-primary);
+          font-weight: 500;
         }
 
-        .tech-desc {
-          font-size: 0.775rem;
-          color: var(--text-muted);
-          line-height: 1.3;
+        /* Editorial Bar */
+        .editorial-tech-bar {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.5rem 2rem;
+          background: var(--bg-card);
+          border: 1px solid var(--border-color);
+          border-radius: var(--radius-sm);
+        }
+
+        @media (min-width: 768px) {
+          .editorial-tech-bar {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+          }
+        }
+
+        .tech-bar-label {
+          font-size: 1.1rem;
+          color: var(--text-primary);
+          white-space: nowrap;
+        }
+
+        .tech-bar-items {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem 0.85rem;
+          align-items: center;
+        }
+
+        .tech-bar-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.85rem;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+        }
+
+        .tech-bar-sep {
+          color: var(--border-dark);
+          font-size: 0.8rem;
         }
       `}</style>
     </section>

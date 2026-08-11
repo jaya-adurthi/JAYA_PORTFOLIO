@@ -3,15 +3,15 @@ import { portfolioData } from '../data/portfolioData';
 import { Icon } from './Icons';
 
 const NAV_LINKS = [
-  { name: 'Home', href: '#hero' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'GitHub', href: '#github' },
-  { name: 'Education', href: '#education' },
-  { name: 'Hire Me', href: '#hire-me' },
-  { name: 'Contact', href: '#contact' }
+  { name: 'HOME', href: '#hero' },
+  { name: 'ABOUT', href: '#about' },
+  { name: 'SKILLS', href: '#skills' },
+  { name: 'EXPERIENCE', href: '#experience' },
+  { name: 'PROJECTS', href: '#projects' },
+  { name: 'GITHUB', href: '#github' },
+  { name: 'EDUCATION', href: '#education' },
+  { name: 'HIRE ME', href: '#hire-me' },
+  { name: 'CONTACT', href: '#contact' }
 ];
 
 export const Navbar = ({ theme, toggleTheme }) => {
@@ -23,7 +23,6 @@ export const Navbar = ({ theme, toggleTheme }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      // Section scrollSpy
       const sections = NAV_LINKS.map(link => link.href.substring(1));
       const scrollPosition = window.scrollY + 120;
 
@@ -52,9 +51,12 @@ export const Navbar = ({ theme, toggleTheme }) => {
   return (
     <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-container">
-        <a href="#hero" className="navbar-brand" onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}>
-          <span className="brand-dot"></span>
-          <span className="brand-name">{portfolioData.personal.shortName}</span>
+        <a
+          href="#hero"
+          className="navbar-brand font-serif"
+          onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
+        >
+          {portfolioData.personal.shortName}
         </a>
 
         {/* Desktop Navigation */}
@@ -80,15 +82,17 @@ export const Navbar = ({ theme, toggleTheme }) => {
             })}
           </ul>
 
+          <div className="nav-divider"></div>
+
           {/* Theme Toggle Button */}
           <button
             type="button"
             className="theme-toggle-btn"
             onClick={toggleTheme}
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
-            aria-label="Toggle dark and light theme"
+            aria-label="Toggle theme"
           >
-            <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={18} />
+            <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={16} />
           </button>
 
           <a
@@ -96,10 +100,10 @@ export const Navbar = ({ theme, toggleTheme }) => {
             download="Adurthi_Jaya_Lakshmi_Durga_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-sm navbar-resume-btn"
+            className="btn btn-secondary btn-sm navbar-resume-btn"
           >
-            <Icon name="Download" size={16} />
-            <span>Download Resume</span>
+            <Icon name="Download" size={14} />
+            <span>RESUME</span>
           </a>
         </nav>
 
@@ -109,9 +113,9 @@ export const Navbar = ({ theme, toggleTheme }) => {
             type="button"
             className="theme-toggle-btn"
             onClick={toggleTheme}
-            aria-label="Toggle dark and light theme"
+            aria-label="Toggle theme"
           >
-            <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={18} />
+            <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={16} />
           </button>
 
           <button
@@ -120,7 +124,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
           >
-            <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={22} />
+            <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={20} />
           </button>
         </div>
 
@@ -147,6 +151,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
                 );
               })}
             </ul>
+
             <div className="mobile-menu-footer">
               <a
                 href={portfolioData.personal.resumePdf}
@@ -156,8 +161,8 @@ export const Navbar = ({ theme, toggleTheme }) => {
                 className="btn btn-primary btn-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Icon name="Download" size={18} />
-                <span>Download Resume</span>
+                <Icon name="Download" size={16} />
+                <span>DOWNLOAD RESUME</span>
               </a>
             </div>
           </div>
@@ -171,18 +176,18 @@ export const Navbar = ({ theme, toggleTheme }) => {
           left: 0;
           right: 0;
           z-index: 999;
-          padding: 1.15rem 0;
+          padding: 1.25rem 0;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           background: transparent;
         }
 
         .navbar-header.scrolled {
-          padding: 0.8rem 0;
+          padding: 0.9rem 0;
           background: var(--bg-glass);
           backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
           border-bottom: 1px solid var(--border-color);
-          box-shadow: var(--shadow-md);
+          box-shadow: var(--shadow-sm);
         }
 
         .navbar-container {
@@ -192,25 +197,16 @@ export const Navbar = ({ theme, toggleTheme }) => {
         }
 
         .navbar-brand {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
           text-decoration: none;
           color: var(--text-primary);
           font-weight: 700;
-          font-size: 1.2rem;
+          font-size: 1.35rem;
           letter-spacing: -0.01em;
+          transition: color 0.2s ease;
         }
 
-        .brand-dot {
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: var(--accent-blue);
-        }
-
-        .brand-name {
-          color: var(--text-primary);
+        .navbar-brand:hover {
+          color: var(--text-accent);
         }
 
         .desktop-nav {
@@ -228,15 +224,16 @@ export const Navbar = ({ theme, toggleTheme }) => {
         .nav-list {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 1.15rem;
           list-style: none;
         }
 
         .nav-link {
           text-decoration: none;
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          font-weight: 500;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
           transition: all 0.2s ease;
           position: relative;
           padding: 0.35rem 0;
@@ -248,7 +245,6 @@ export const Navbar = ({ theme, toggleTheme }) => {
 
         .nav-link.active {
           color: var(--text-accent);
-          font-weight: 600;
         }
 
         .nav-link.active::after {
@@ -257,9 +253,15 @@ export const Navbar = ({ theme, toggleTheme }) => {
           bottom: -2px;
           left: 0;
           width: 100%;
-          height: 2px;
-          background: var(--accent-blue);
-          border-radius: 2px;
+          height: 1px;
+          background: var(--text-accent);
+        }
+
+        .nav-divider {
+          width: 1px;
+          height: 18px;
+          background: var(--border-color);
+          margin: 0 0.25rem;
         }
 
         .mobile-header-controls {
@@ -282,16 +284,10 @@ export const Navbar = ({ theme, toggleTheme }) => {
           border: 1px solid var(--border-color);
           color: var(--text-primary);
           padding: 0.5rem;
-          border-radius: var(--radius-md);
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: all 0.2s ease;
         }
 
-        .mobile-menu-toggle:hover {
-          background: var(--bg-card-hover);
-        }
-
-        /* Mobile Menu Drawer */
         .mobile-menu-overlay {
           position: fixed;
           top: 0;
@@ -329,11 +325,12 @@ export const Navbar = ({ theme, toggleTheme }) => {
         .mobile-nav-link {
           text-decoration: none;
           color: var(--text-secondary);
-          font-size: 1.15rem;
+          font-size: 1rem;
           font-weight: 600;
+          letter-spacing: 0.1em;
           display: block;
           transition: all 0.2s ease;
-          padding: 0.4rem 0;
+          padding: 0.5rem 0;
           border-bottom: 1px solid var(--border-color);
         }
 

@@ -5,9 +5,6 @@ import { Icon } from './Icons';
 export const Projects = () => {
   const { projects } = portfolioData;
 
-  // Track flipped state per project card
-  const [flippedCards, setFlippedCards] = useState({});
-  // Intersection observer state for scroll entrance animation
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -19,7 +16,7 @@ export const Projects = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     if (currentSection) {
@@ -33,165 +30,117 @@ export const Projects = () => {
     };
   }, []);
 
-  const toggleFlip = (id, e) => {
-    // If click originated from inside an anchor or action button, do not flip
-    if (e.target.closest('a') || e.target.closest('button.action-btn')) {
-      return;
-    }
-    setFlippedCards(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-
   return (
     <section id="projects" ref={sectionRef} className="section projects-section">
       <div className="container">
-        {/* Section Header with Developer Visual Intro */}
+        {/* Editorial Section Header */}
         <div className="section-header">
-          <div className="projects-intro-icon-box">
-            <Icon name="Terminal" size={24} />
-          </div>
-          <h2 className="section-title">Featured Projects</h2>
+          <span className="section-label">FEATURED WORK</span>
+          <h2 className="section-title font-serif">Selected Case Studies</h2>
           <p className="section-subtitle">
-            A selection of my recent work and projects — click or tap any card to explore live deployments and repositories.
+            Editorial showcase of web platforms, AI applications, and developer tools built with React and Python.
           </p>
         </div>
 
-        <div className={`projects-grid ${isVisible ? 'animate-entrance' : ''}`}>
+        {/* Editorial Showcase Blocks */}
+        <div className={`editorial-projects-stack ${isVisible ? 'animate-entrance' : ''}`}>
           {projects.map((project, index) => {
-            const isFlipped = !!flippedCards[project.id];
             const isFeatured = project.featured;
+            const projectNum = `0${index + 1}`;
 
             return (
-              <div
+              <article
                 key={project.id}
-                className="flip-card-perspective"
-                style={{ animationDelay: `${index * 0.15}s` }}
-                onClick={(e) => toggleFlip(project.id, e)}
+                className={`editorial-project-block glass-card ${isFeatured ? 'featured-block' : ''}`}
               >
-                <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
-                  {/* ================= FRONT SIDE (With Large 42% Top Banner Image) ================= */}
-                  <div className={`glass-card flip-card-front ${isFeatured ? 'card-featured' : ''}`}>
-                    {/* Top 42% Height Project Banner Image */}
-                    <div className="card-banner-wrapper">
+                <div className="project-grid-inner">
+                  {/* Left Column - Large Image / Video Preview Visual Banner */}
+                  <div className="project-visual-column">
+                    <div className="project-visual-frame">
                       <img
                         src={project.bannerImg}
                         alt={project.title}
-                        className="card-banner-img"
+                        className="project-banner-media"
                       />
-                      <div className="banner-overlay"></div>
-                      
-                      <div className="banner-badges-header">
-                        <span className={`badge ${isFeatured ? 'badge-featured' : 'badge-tech'}`}>
-                          {project.subtitle}
-                        </span>
-                        {isFeatured && (
-                          <span className="featured-star-pill">Featured Project</span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Front Details below image */}
-                    <div className="front-card-body">
-                      <div className="front-info">
-                        <h3 className="front-project-title">{project.title}</h3>
-                        <p className="front-project-teaser">{project.subtitle}</p>
-                      </div>
-
-                      <div className="front-flip-prompt">
-                        <Icon name="ChevronRight" size={16} className="prompt-icon" />
-                        <span>Tap / Click to explore</span>
-                      </div>
+                      <div className="editorial-media-overlay"></div>
+                      <span className="project-index-number font-serif">{projectNum}</span>
                     </div>
                   </div>
 
-                  {/* ================= BACK SIDE (Project Specs & 3 Functional Action Buttons) ================= */}
-                  <div className={`glass-card flip-card-back ${isFeatured ? 'card-featured' : ''}`}>
-                    <div className="back-header">
-                      <div className="back-title-group">
-                        <h3 className="back-project-title">{project.title}</h3>
-                        <span className="back-project-subtitle">{project.subtitle}</span>
-                      </div>
-                      <button
-                        type="button"
-                        className="flip-back-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFlip(project.id, e);
-                        }}
-                        title="Flip back"
-                        aria-label="Flip back to front"
-                      >
-                        ✕
-                      </button>
+                  {/* Right Column - Editorial Information & Actions */}
+                  <div className="project-info-column">
+                    <div className="project-meta-header">
+                      <span className="project-category-tag">{project.subtitle}</span>
+                      {isFeatured && <span className="featured-chip font-serif">Featured</span>}
                     </div>
 
-                    <p className="back-description">{project.description}</p>
+                    <h3 className="project-title font-serif">{project.title}</h3>
 
-                    <div className="tech-chips-wrapper">
+                    <p className="project-description">
+                      {project.description}
+                    </p>
+
+                    {/* Tech stack thin labels */}
+                    <div className="project-tech-divider"></div>
+                    <div className="project-tech-labels">
                       {project.techStack.map((tech) => (
-                        <span key={tech} className="tech-chip">
+                        <span key={tech} className="tech-label-item">
                           {tech}
                         </span>
                       ))}
                     </div>
 
-                    <div className="card-divider"></div>
+                    <div className="project-actions-divider"></div>
 
-                    {/* 3 Action Buttons Aligned at Bottom */}
-                    <div className="card-actions">
-                      {/* 1. GitHub Code Button */}
+                    {/* 3 Functional Action Buttons */}
+                    <div className="project-editorial-actions">
+                      {/* 1. Code / GitHub */}
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-secondary action-btn"
-                        onClick={(e) => e.stopPropagation()}
                       >
-                        <Icon name="Github" size={15} />
-                        <span>GitHub</span>
+                        <Icon name="Github" size={14} />
+                        <span>CODE</span>
                       </a>
 
-                      {/* 2. Live Demo / Website Button */}
+                      {/* 2. Live Demo / Website */}
                       {project.liveUrl ? (
                         <a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn btn-primary action-btn"
-                          onClick={(e) => e.stopPropagation()}
                         >
-                          <Icon name="ExternalLink" size={15} />
-                          <span>{project.liveButtonText || 'Live Demo'}</span>
+                          <Icon name="ExternalLink" size={14} />
+                          <span>{project.liveButtonText || 'LIVE DEMO'}</span>
                         </a>
                       ) : (
                         <button
                           type="button"
                           className="btn btn-disabled action-btn"
                           disabled
-                          onClick={(e) => e.stopPropagation()}
                         >
-                          <Icon name="ExternalLink" size={15} />
-                          <span>Live Demo</span>
+                          <Icon name="ExternalLink" size={14} />
+                          <span>LIVE DEMO</span>
                         </button>
                       )}
 
-                      {/* 3. Demo Video Button */}
+                      {/* 3. Demo Video */}
                       <a
                         href={project.demoVideoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-outline action-btn"
-                        onClick={(e) => e.stopPropagation()}
                       >
-                        <Icon name="Play" size={15} />
-                        <span>Demo Video</span>
+                        <Icon name="Play" size={14} />
+                        <span>VIDEO</span>
                       </a>
                     </div>
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
@@ -202,295 +151,182 @@ export const Projects = () => {
           position: relative;
         }
 
-        .projects-intro-icon-box {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 46px;
-          height: 46px;
-          border-radius: var(--radius-md);
-          background: rgba(37, 99, 235, 0.1);
-          border: 1px solid rgba(37, 99, 235, 0.25);
-          color: var(--text-accent);
-          margin-bottom: 0.85rem;
-        }
-
-        .projects-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 2rem;
+        .editorial-projects-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 2.5rem;
           opacity: 0;
           transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
+          transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .projects-grid.animate-entrance {
+        .editorial-projects-stack.animate-entrance {
           opacity: 1;
           transform: translateY(0);
         }
 
-        @media (min-width: 992px) {
-          .projects-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        /* 3D Flip Card Perspective Container */
-        .flip-card-perspective {
-          perspective: 1000px;
-          height: 440px;
-          cursor: pointer;
-        }
-
-        .animate-entrance .flip-card-perspective {
-          animation: cardFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes cardFadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .flip-card-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          text-align: left;
-          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-          transform-style: preserve-3d;
-        }
-
-        .flip-card-inner.flipped {
-          transform: rotateY(180deg);
-        }
-
-        .flip-card-front,
-        .flip-card-back {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-          display: flex;
-          flex-direction: column;
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-sm);
-          overflow: hidden;
-        }
-
-        /* Front Styling */
-        .flip-card-front {
-          transform: rotateY(0deg);
+        .editorial-project-block {
           padding: 0;
-          background: var(--bg-card);
+          overflow: hidden;
+          transition: all 0.3s ease;
           border: 1px solid var(--border-color);
         }
 
-        .card-banner-wrapper {
-          position: relative;
-          height: 42%;
-          width: 100%;
-          overflow: hidden;
+        .editorial-project-block:hover {
+          border-color: var(--border-dark);
         }
 
-        .card-banner-img {
+        .project-grid-inner {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 992px) {
+          .project-grid-inner {
+            grid-template-columns: 1.15fr 1fr;
+          }
+        }
+
+        /* Visual Column */
+        .project-visual-column {
+          position: relative;
+          background: var(--bg-secondary);
+          overflow: hidden;
+          min-height: 280px;
+        }
+
+        @media (min-width: 992px) {
+          .project-visual-column {
+            min-height: 380px;
+          }
+        }
+
+        .project-visual-frame {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        .project-banner-media {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
-          transition: transform 0.4s ease;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .flip-card-perspective:hover .card-banner-img {
-          transform: scale(1.05);
+        .editorial-project-block:hover .project-banner-media {
+          transform: scale(1.04);
         }
 
-        .banner-overlay {
+        .editorial-media-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(15, 23, 42, 0.9) 100%);
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
         }
 
-        .banner-badges-header {
+        .project-index-number {
           position: absolute;
-          top: 1rem;
-          left: 1rem;
-          right: 1rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          bottom: 1.25rem;
+          left: 1.5rem;
+          font-size: 3.5rem;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 0.85);
+          line-height: 1;
           z-index: 2;
         }
 
-        .badge-featured {
-          background: rgba(15, 23, 42, 0.85);
-          border-color: rgba(37, 99, 235, 0.35);
-          color: var(--text-accent);
-          backdrop-filter: blur(8px);
-        }
-
-        .featured-star-pill {
-          font-size: 0.725rem;
-          font-weight: 600;
-          padding: 0.25rem 0.65rem;
-          border-radius: var(--radius-full);
-          background: rgba(37, 99, 235, 0.85);
-          color: #ffffff;
-          backdrop-filter: blur(8px);
-        }
-
-        .front-card-body {
-          padding: 1.5rem;
+        /* Info Column */
+        .project-info-column {
+          padding: 2.25rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          flex: 1;
         }
 
-        .front-info {
-          display: flex;
-          flex-direction: column;
-          gap: 0.35rem;
+        @media (min-width: 768px) {
+          .project-info-column {
+            padding: 2.75rem;
+          }
         }
 
-        .front-project-title {
-          font-size: 1.35rem;
-          font-weight: 700;
-          color: var(--text-primary);
-        }
-
-        .front-project-teaser {
-          font-size: 0.925rem;
-          color: var(--text-secondary);
-          font-weight: 500;
-        }
-
-        .front-flip-prompt {
+        .project-meta-header {
           display: flex;
           align-items: center;
-          justify-content: center;
-          gap: 0.4rem;
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-accent);
-          padding-top: 0.75rem;
-          border-top: 1px solid var(--border-color);
-        }
-
-        .prompt-icon {
-          animation: bounceRight 1.5s infinite;
-        }
-
-        @keyframes bounceRight {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(4px); }
-        }
-
-        /* Back Styling */
-        .flip-card-back {
-          transform: rotateY(180deg);
-          padding: 1.75rem;
           justify-content: space-between;
-          background: var(--bg-card);
-          border: 1px solid var(--accent-blue);
-        }
-
-        .back-header {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 0.5rem;
-        }
-
-        .back-title-group {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .back-project-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--text-primary);
-        }
-
-        .back-project-subtitle {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-accent);
-        }
-
-        .flip-back-btn {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid var(--border-color);
-          color: var(--text-secondary);
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.8rem;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          flex-shrink: 0;
-        }
-
-        .flip-back-btn:hover {
-          background: rgba(255, 255, 255, 0.15);
-          color: var(--text-primary);
-        }
-
-        .back-description {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          line-height: 1.55;
-          margin: 0.5rem 0;
-        }
-
-        .tech-chips-wrapper {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.4rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .tech-chip {
-          display: inline-flex;
-          align-items: center;
-          padding: 0.2rem 0.6rem;
-          border-radius: var(--radius-full);
-          font-size: 0.75rem;
-          font-weight: 500;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid var(--border-color);
-          color: var(--text-secondary);
-        }
-
-        .card-divider {
-          height: 1px;
-          background: var(--border-color);
-          width: 100%;
-          margin-top: auto;
           margin-bottom: 0.75rem;
         }
 
-        .card-actions {
+        .project-category-tag {
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: var(--text-accent);
+        }
+
+        .featured-chip {
+          font-size: 0.8rem;
+          font-style: italic;
+          color: var(--text-secondary);
+        }
+
+        .project-title {
+          font-size: 1.85rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 1rem;
+          line-height: 1.25;
+        }
+
+        @media (min-width: 768px) {
+          .project-title {
+            font-size: 2.25rem;
+          }
+        }
+
+        .project-description {
+          font-size: 0.975rem;
+          color: var(--text-secondary);
+          line-height: 1.65;
+          margin-bottom: 1.25rem;
+        }
+
+        .project-tech-divider {
+          height: 1px;
+          background: var(--border-color);
+          margin-bottom: 1rem;
+        }
+
+        .project-tech-labels {
           display: flex;
-          gap: 0.4rem;
+          flex-wrap: wrap;
+          gap: 0.5rem 0.85rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .tech-label-item {
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+        }
+
+        .project-actions-divider {
+          height: 1px;
+          background: var(--border-color);
+          margin-top: auto;
+          margin-bottom: 1.25rem;
+        }
+
+        .project-editorial-actions {
+          display: flex;
+          gap: 0.6rem;
+          flex-wrap: wrap;
         }
 
         .action-btn {
           flex: 1;
-          padding: 0.5rem 0.35rem;
-          font-size: 0.775rem;
-          font-weight: 600;
+          min-width: 100px;
         }
       `}</style>
     </section>

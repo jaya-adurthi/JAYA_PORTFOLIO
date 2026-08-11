@@ -1,81 +1,64 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { Icon } from './Icons';
 
 export const About = () => {
   const { aboutParagraphs } = portfolioData.personal;
-
-  const focusPoints = [
-    {
-      title: "Software Engineering",
-      desc: "Building clean, scalable applications with React, JavaScript, and Python.",
-      icon: "Code"
-    },
-    {
-      title: "Real-World Impact",
-      desc: "Developing practical platforms like student portals and AI tools for sustainability.",
-      icon: "Globe"
-    },
-    {
-      title: "Continuous Growth",
-      desc: "Fast learner committed to exploring new AI frameworks and modern web technologies.",
-      icon: "BookOpen"
-    }
-  ];
 
   return (
     <section id="about" className="section about-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">About Me</h2>
-          <p className="section-subtitle">
-            Passionate about engineering software solutions that bridge technical complexity with practical everyday utility.
-          </p>
+          <span className="section-label">ABOUT ME</span>
+          <h2 className="section-title font-serif">Academic & Engineering Focus</h2>
         </div>
 
         <div className="about-grid">
-          {/* Main Copy Card */}
-          <div className="glass-card about-main-card">
-            <div className="about-header-badge">
-              <span>CSE Undergraduate (2023 – 2027)</span>
-            </div>
-
-            <div className="about-text-content">
-              {aboutParagraphs.map((para, idx) => (
-                <p key={idx} className="about-paragraph">
-                  {para}
-                </p>
-              ))}
-            </div>
+          <div className="about-paragraphs-column">
+            {aboutParagraphs.map((paragraph, index) => (
+              <p key={index} className="about-text">
+                {paragraph}
+              </p>
+            ))}
           </div>
 
-          {/* Feature Highlights Cards */}
-          <div className="about-features">
-            {focusPoints.map((point) => (
-              <div key={point.title} className="glass-card feature-card">
-                <div className="feature-icon-wrapper">
-                  <Icon name={point.icon} size={22} />
+          <div className="about-editorial-box glass-card">
+            <h3 className="box-title font-serif">Core Specializations</h3>
+            <ul className="spec-list">
+              <li className="spec-item">
+                <span className="spec-num">01</span>
+                <div className="spec-info">
+                  <span className="spec-name">Frontend Web Engineering</span>
+                  <span className="spec-desc">React.js, JavaScript (ES6+), HTML5, CSS3, Vite</span>
                 </div>
-                <div className="feature-info">
-                  <h3 className="feature-title">{point.title}</h3>
-                  <p className="feature-desc">{point.desc}</p>
+              </li>
+              <li className="spec-item">
+                <span className="spec-num">02</span>
+                <div className="spec-info">
+                  <span className="spec-name">Python & AI Web Applications</span>
+                  <span className="spec-desc">Streamlit, Python script automation, AI integrations</span>
                 </div>
-              </div>
-            ))}
+              </li>
+              <li className="spec-item">
+                <span className="spec-num">03</span>
+                <div className="spec-info">
+                  <span className="spec-name">Problem Solving & Architecture</span>
+                  <span className="spec-desc">Data Structures, SQL, Clean Code & Version Control</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
       <style>{`
         .about-section {
-          background: rgba(17, 24, 39, 0.4);
           position: relative;
         }
 
         .about-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.75rem;
+          gap: 3rem;
         }
 
         @media (min-width: 992px) {
@@ -84,74 +67,66 @@ export const About = () => {
           }
         }
 
-        .about-main-card {
+        .about-paragraphs-column {
           display: flex;
           flex-direction: column;
           gap: 1.25rem;
         }
 
-        .about-header-badge {
-          display: inline-flex;
-          align-items: center;
-          padding: 0.3rem 0.8rem;
-          border-radius: var(--radius-sm);
-          background: rgba(37, 99, 235, 0.1);
-          border: 1px solid rgba(37, 99, 235, 0.25);
-          color: var(--text-accent);
-          font-size: 0.825rem;
-          font-weight: 600;
-          align-self: flex-start;
-        }
-
-        .about-text-content {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .about-paragraph {
+        .about-text {
+          font-size: 1.05rem;
           color: var(--text-secondary);
-          font-size: 1rem;
           line-height: 1.7;
         }
 
-        .about-features {
+        .about-editorial-box {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.5rem;
         }
 
-        .feature-card {
+        .box-title {
+          font-size: 1.5rem;
+          color: var(--text-primary);
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-list {
+          list-style: none;
           display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .spec-item {
+          display: flex;
+          gap: 1rem;
           align-items: flex-start;
-          gap: 1rem;
-          padding: 1.25rem;
         }
 
-        .feature-icon-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 42px;
-          height: 42px;
-          border-radius: var(--radius-md);
-          background: rgba(37, 99, 235, 0.1);
-          border: 1px solid rgba(37, 99, 235, 0.2);
-          color: var(--text-accent);
-          flex-shrink: 0;
-        }
-
-        .feature-title {
-          font-size: 1.05rem;
+        .spec-num {
+          font-size: 0.8rem;
           font-weight: 700;
-          margin-bottom: 0.25rem;
+          color: var(--text-accent);
+          padding-top: 0.15rem;
+        }
+
+        .spec-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+
+        .spec-name {
+          font-size: 1rem;
+          font-weight: 600;
           color: var(--text-primary);
         }
 
-        .feature-desc {
-          font-size: 0.9rem;
+        .spec-desc {
+          font-size: 0.875rem;
           color: var(--text-secondary);
-          line-height: 1.5;
         }
       `}</style>
     </section>

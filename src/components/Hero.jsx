@@ -7,52 +7,38 @@ const ROLES = ['Software Engineer', 'Frontend Developer'];
 export const Hero = () => {
   const { fullName, summary, profileImg, resumePdf, github, linkedin, email } = portfolioData.personal;
 
-  // Typing animation state
+  // Rotating role text state with opacity transition
   const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [fadeState, setFadeState] = useState('fade-in');
 
   useEffect(() => {
-    const currentRole = ROLES[roleIndex];
-    let timeout;
+    const interval = setInterval(() => {
+      setFadeState('fade-out');
+      setTimeout(() => {
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+        setFadeState('fade-in');
+      }, 400);
+    }, 3200);
 
-    if (!isDeleting && displayText !== currentRole) {
-      // Typing next character
-      timeout = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length + 1));
-      }, 90);
-    } else if (!isDeleting && displayText === currentRole) {
-      // Finished typing full word -> pause before deleting
-      timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 2000);
-    } else if (isDeleting && displayText !== '') {
-      // Deleting character
-      timeout = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length - 1));
-      }, 45);
-    } else if (isDeleting && displayText === '') {
-      // Finished deleting -> switch to next role
-      setIsDeleting(false);
-      setRoleIndex((prevIndex) => (prevIndex + 1) % ROLES.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, roleIndex]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="hero" className="hero-section">
       <div className="container hero-container">
-        {/* Left Column - Name, Typing Role, Actions & Social Bar */}
+        {/* Left Column - Name, Rotating Role, Summary & CTAs */}
         <div className="hero-content">
-          <h1 className="hero-name">
+          <span className="hero-pretitle">Personal Portfolio</span>
+
+          <h1 className="hero-name font-serif">
             {fullName}
           </h1>
 
-          <h2 className="hero-role-typing">
-            <span className="typing-text">{displayText}</span>
-            <span className="blinking-cursor">|</span>
-          </h2>
+          <div className="hero-role-rotating">
+            <span className={`rotating-text ${fadeState}`}>
+              {ROLES[roleIndex]}
+            </span>
+          </div>
 
           <p className="hero-summary">
             {summary}
@@ -60,8 +46,8 @@ export const Hero = () => {
 
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">
-              <span>View My Projects</span>
-              <Icon name="ChevronRight" size={18} />
+              <span>View Projects</span>
+              <Icon name="ChevronRight" size={16} />
             </a>
 
             <a
@@ -71,7 +57,7 @@ export const Hero = () => {
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              <Icon name="Download" size={18} />
+              <Icon name="Download" size={16} />
               <span>Download Resume</span>
             </a>
           </div>
@@ -82,57 +68,49 @@ export const Hero = () => {
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-link"
+              className="editorial-social-link"
               title="GitHub Profile"
-              aria-label="GitHub Profile"
             >
-              <Icon name="Github" size={18} />
+              <Icon name="Github" size={16} />
               <span>GitHub</span>
             </a>
+
+            <span className="social-dot">•</span>
 
             <a
               href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-link"
+              className="editorial-social-link"
               title="LinkedIn Profile"
-              aria-label="LinkedIn Profile"
             >
-              <Icon name="Linkedin" size={18} />
+              <Icon name="Linkedin" size={16} />
               <span>LinkedIn</span>
             </a>
 
+            <span className="social-dot">•</span>
+
             <a
               href={`mailto:${email}`}
-              className="social-icon-link"
+              className="editorial-social-link"
               title="Send Email"
-              aria-label="Send Email"
             >
-              <Icon name="Mail" size={18} />
+              <Icon name="Mail" size={16} />
               <span>Email</span>
             </a>
           </div>
 
-          {/* Quick info highlights */}
-          <div className="hero-highlights">
-            <div className="highlight-item">
-              <span className="highlight-val">B.Tech CSE</span>
-              <span className="highlight-label">Final Year Student</span>
-            </div>
-            <div className="highlight-divider"></div>
-            <div className="highlight-item">
-              <span className="highlight-val">8.26</span>
-              <span className="highlight-label">CGPA</span>
-            </div>
-            <div className="highlight-divider"></div>
-            <div className="highlight-item">
-              <span className="highlight-val">Palakollu, AP</span>
-              <span className="highlight-label">Location</span>
-            </div>
+          {/* Highlights summary line */}
+          <div className="editorial-highlights-line">
+            <span className="highlight-tag">B.Tech CSE Student</span>
+            <span className="highlight-sep">|</span>
+            <span className="highlight-tag">CGPA 8.26</span>
+            <span className="highlight-sep">|</span>
+            <span className="highlight-tag">Palakollu, AP</span>
           </div>
         </div>
 
-        {/* Right Column - Clean Professional Profile Picture & Available for Work Badge */}
+        {/* Right Column - Profile Visual & Status */}
         <div className="hero-visual">
           <div className="profile-visual-container">
             <div className="profile-wrapper">
@@ -146,7 +124,6 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* Available for Work Pill Badge centered directly below profile image */}
             <div className="available-pill">
               <span className="green-status-dot"></span>
               <span>Available for work</span>
@@ -157,24 +134,25 @@ export const Hero = () => {
 
       <style>{`
         .hero-section {
-          padding-top: 8rem;
-          padding-bottom: 4.5rem;
+          padding-top: 9rem;
+          padding-bottom: 5.5rem;
           position: relative;
-          min-height: 85vh;
+          min-height: 88vh;
           display: flex;
           align-items: center;
+          border-bottom: 1px solid var(--border-color);
         }
 
         .hero-container {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 3rem;
+          gap: 3.5rem;
           align-items: center;
         }
 
         @media (min-width: 992px) {
           .hero-container {
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.25fr 0.75fr;
           }
         }
 
@@ -184,65 +162,76 @@ export const Hero = () => {
           align-items: flex-start;
         }
 
+        .hero-pretitle {
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--text-accent);
+          margin-bottom: 0.75rem;
+        }
+
         .hero-name {
-          font-size: 2.5rem;
-          font-weight: 800;
+          font-size: 2.75rem;
+          font-weight: 600;
           line-height: 1.15;
-          letter-spacing: -0.03em;
-          margin-bottom: 0.5rem;
+          letter-spacing: -0.02em;
+          margin-bottom: 0.85rem;
           color: var(--text-primary);
         }
 
         @media (min-width: 768px) {
           .hero-name {
-            font-size: 3.25rem;
+            font-size: 3.8rem;
           }
         }
 
-        .hero-role-typing {
-          font-family: var(--font-sans);
-          font-size: 1.4rem;
-          font-weight: 700;
-          margin-bottom: 1.25rem;
+        .hero-role-rotating {
+          font-size: 1.35rem;
+          font-weight: 500;
+          margin-bottom: 1.5rem;
           color: var(--text-accent);
           min-height: 2.2rem;
           display: flex;
           align-items: center;
-          letter-spacing: -0.01em;
+          font-family: var(--font-sans);
+          letter-spacing: 0.02em;
         }
 
         @media (min-width: 768px) {
-          .hero-role-typing {
-            font-size: 1.65rem;
+          .hero-role-rotating {
+            font-size: 1.6rem;
           }
         }
 
-        .blinking-cursor {
+        .rotating-text {
+          transition: opacity 0.4s ease, transform 0.4s ease;
           display: inline-block;
-          margin-left: 2px;
-          color: var(--text-accent);
-          animation: cursorBlink 0.9s infinite;
-          font-weight: 400;
         }
 
-        @keyframes cursorBlink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
+        .rotating-text.fade-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .rotating-text.fade-out {
+          opacity: 0;
+          transform: translateY(-8px);
         }
 
         .hero-summary {
           font-size: 1.05rem;
           color: var(--text-secondary);
           max-width: 580px;
-          margin-bottom: 1.75rem;
-          line-height: 1.65;
+          margin-bottom: 2rem;
+          line-height: 1.7;
         }
 
         .hero-actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.85rem;
-          margin-bottom: 1.75rem;
+          gap: 1rem;
+          margin-bottom: 2rem;
           width: 100%;
         }
 
@@ -255,77 +244,45 @@ export const Hero = () => {
         .hero-social-bar {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          margin-bottom: 2.25rem;
+          gap: 0.85rem;
+          margin-bottom: 1.75rem;
           flex-wrap: wrap;
         }
 
-        .social-icon-link {
+        .editorial-social-link {
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
+          gap: 0.4rem;
           text-decoration: none;
           color: var(--text-secondary);
-          font-size: 0.9rem;
-          font-weight: 600;
-          padding: 0.4rem 0.85rem;
-          border-radius: var(--radius-md);
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          transition: all 0.2s ease;
+          font-size: 0.85rem;
+          font-weight: 500;
+          transition: color 0.2s ease;
         }
 
-        .social-icon-link:hover {
-          color: var(--text-accent);
-          border-color: var(--accent-blue);
-          transform: translateY(-1px);
+        .editorial-social-link:hover {
+          color: var(--text-primary);
         }
 
-        .hero-highlights {
+        .social-dot {
+          color: var(--border-dark);
+          font-size: 0.7rem;
+        }
+
+        .editorial-highlights-line {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
-          padding: 0.85rem 1.25rem;
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--radius-md);
+          gap: 0.75rem;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          padding-top: 1rem;
+          border-top: 1px solid var(--border-color);
           width: 100%;
           max-width: 580px;
         }
 
-        @media (max-width: 576px) {
-          .hero-highlights {
-            flex-direction: column;
-            gap: 0.75rem;
-            align-items: flex-start;
-          }
-          .highlight-divider {
-            display: none;
-          }
-        }
-
-        .highlight-item {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .highlight-val {
-          font-weight: 700;
-          font-size: 1.05rem;
-          color: var(--text-primary);
-        }
-
-        .highlight-label {
-          font-size: 0.75rem;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .highlight-divider {
-          width: 1px;
-          height: 28px;
-          background: var(--border-color);
+        .highlight-sep {
+          color: var(--border-color);
         }
 
         /* Profile Visual styling */
@@ -350,8 +307,8 @@ export const Hero = () => {
 
         @media (min-width: 768px) {
           .profile-wrapper {
-            width: 290px;
-            height: 290px;
+            width: 280px;
+            height: 280px;
           }
         }
 
@@ -361,12 +318,12 @@ export const Hero = () => {
           border-radius: 50%;
           padding: 3px;
           background: var(--border-color);
-          box-shadow: var(--shadow-md);
-          transition: border-color 0.25s ease;
+          box-shadow: var(--shadow-sm);
+          transition: border-color 0.3s ease;
         }
 
         .profile-wrapper:hover .profile-border-ring {
-          background: var(--accent-blue);
+          border-color: var(--text-accent);
         }
 
         .profile-img {
