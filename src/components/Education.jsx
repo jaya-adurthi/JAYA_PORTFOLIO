@@ -1,117 +1,225 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
+import { Icon } from './Icons';
 
 export const Education = () => {
-  const { degree, college, duration, cgpa, location } = portfolioData.education;
+  const { education } = portfolioData;
 
   return (
     <section id="education" className="section education-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">ACADEMIC BACKGROUND</span>
-          <h2 className="section-title font-serif">Education</h2>
+          <div className="section-tag">
+            <Icon name="BookOpen" size={14} />
+            <span>Academic Background</span>
+          </div>
+          <h2 className="section-title">Education</h2>
+          <p className="section-subtitle">
+            Formal education in Computer Science and Engineering.
+          </p>
         </div>
 
-        <div className="education-editorial-card glass-card">
-          <div className="edu-card-header">
-            <div>
-              <span className="edu-year-tag">{duration}</span>
-              <h3 className="edu-degree font-serif">{degree}</h3>
-              <span className="edu-college">{college}</span>
+        <div className="education-card-wrapper">
+          <div className="glass-card education-card">
+            <div className="edu-top-row">
+              <div className="edu-icon-badge">
+                <Icon name="BookOpen" size={24} />
+              </div>
+              <div className="edu-duration-badge">
+                <span>{education.duration}</span>
+              </div>
             </div>
-            <div className="edu-cgpa-badge font-serif">
-              <span className="cgpa-val">{cgpa}</span>
-              <span className="cgpa-label">CGPA</span>
+
+            <div className="edu-main-info">
+              <h3 className="edu-degree">{education.degree}</h3>
+              <h4 className="edu-college">{education.college}</h4>
             </div>
-          </div>
 
-          <div className="edu-divider"></div>
+            <div className="edu-details-grid">
+              <div className="detail-item">
+                <span className="detail-label">Location</span>
+                <span className="detail-value">
+                  <Icon name="MapPin" size={14} />
+                  <span>{education.location}</span>
+                </span>
+              </div>
 
-          <div className="edu-card-footer">
-            <span className="edu-location">📍 {location}</span>
-            <span className="edu-status">Final-Year B.Tech Student</span>
+              <div className="detail-item">
+                <span className="detail-label">Current CGPA</span>
+                <span className="detail-value cgpa-highlight">
+                  <span>{education.cgpa}</span>
+                </span>
+              </div>
+
+              <div className="detail-item">
+                <span className="detail-label">Status</span>
+                <span className="detail-value">
+                  <span className="dot-active"></span>
+                  <span>Final Year Student</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="edu-courses-box">
+              <span className="courses-title">Core Subjects Covered:</span>
+              <div className="courses-tags">
+                <span className="badge badge-tech">Data Structures & Algorithms</span>
+                <span className="badge badge-tech">Object-Oriented Programming</span>
+                <span className="badge badge-tech">Database Management Systems</span>
+                <span className="badge badge-tech">Operating Systems & Linux</span>
+                <span className="badge badge-tech">Computer Networks</span>
+                <span className="badge badge-tech">Software Engineering</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
         .education-section {
+          background: rgba(13, 19, 34, 0.4);
           position: relative;
         }
 
-        .education-editorial-card {
-          max-width: 860px;
+        .education-card-wrapper {
+          max-width: 850px;
           margin: 0 auto;
+        }
+
+        .education-card {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.75rem;
+          padding: 2.25rem;
+          border-color: rgba(59, 130, 246, 0.25);
+          position: relative;
+          overflow: hidden;
         }
 
-        .edu-card-header {
+        .education-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 5px;
+          height: 100%;
+          background: var(--accent-gradient);
+        }
+
+        .edu-top-row {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 1.25rem;
+          align-items: center;
         }
 
-        .edu-year-tag {
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
+        .edu-icon-badge {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 52px;
+          height: 52px;
+          border-radius: var(--radius-md);
+          background: rgba(59, 130, 246, 0.12);
+          border: 1px solid rgba(59, 130, 246, 0.3);
           color: var(--text-accent);
-          display: block;
-          margin-bottom: 0.35rem;
+        }
+
+        .edu-duration-badge {
+          padding: 0.4rem 1rem;
+          border-radius: var(--radius-full);
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--border-color);
+          color: var(--text-secondary);
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+
+        .edu-main-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
         }
 
         .edu-degree {
-          font-size: 1.6rem;
-          color: var(--text-primary);
-          margin-bottom: 0.25rem;
-        }
-
-        .edu-college {
-          font-size: 1rem;
-          color: var(--text-secondary);
-        }
-
-        .edu-cgpa-badge {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          padding: 0.5rem 1.25rem;
-          border: 1px solid var(--border-color);
-          border-radius: var(--radius-sm);
-          background: var(--bg-secondary);
-        }
-
-        .cgpa-val {
           font-size: 1.5rem;
           font-weight: 700;
           color: var(--text-primary);
         }
 
-        .cgpa-label {
-          font-size: 0.7rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--text-muted);
+        .edu-college {
+          font-size: 1.15rem;
+          font-weight: 600;
+          color: var(--text-accent);
         }
 
-        .edu-divider {
-          height: 1px;
-          background: var(--border-color);
+        .edu-details-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+          padding: 1.25rem;
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid var(--border-color);
+          border-radius: var(--radius-md);
         }
 
-        .edu-card-footer {
+        @media (min-width: 640px) {
+          .edu-details-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .detail-item {
           display: flex;
-          justify-content: space-between;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .detail-label {
+          font-size: 0.775rem;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          font-weight: 600;
+        }
+
+        .detail-value {
+          display: flex;
           align-items: center;
-          font-size: 0.9rem;
+          gap: 0.4rem;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .cgpa-highlight {
+          color: #60a5fa;
+          font-size: 1.1rem;
+        }
+
+        .dot-active {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #10b981;
+          box-shadow: 0 0 8px #10b981;
+        }
+
+        .edu-courses-box {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .courses-title {
+          font-size: 0.875rem;
+          font-weight: 600;
           color: var(--text-secondary);
+        }
+
+        .courses-tags {
+          display: flex;
           flex-wrap: wrap;
-          gap: 0.5rem;
+          gap: 0.6rem;
         }
       `}</style>
     </section>

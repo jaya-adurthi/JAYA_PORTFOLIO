@@ -3,116 +3,110 @@ import { portfolioData } from '../data/portfolioData';
 import { Icon } from './Icons';
 
 export const Footer = () => {
-  const { fullName, shortName, github, linkedin, email } = portfolioData.personal;
+  const { fullName, email, github, linkedin } = portfolioData.personal;
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer-section">
-      <div className="container">
-        <div className="footer-content">
-          <div className="footer-brand-col">
-            <span className="footer-brand font-serif">{shortName}</span>
-            <p className="footer-tagline">
-              Software Engineer & Frontend Developer portfolio built with React and Vite.
-            </p>
+      <div className="container footer-container">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <span className="brand-dot"></span>
+            <span className="footer-brand-name">{fullName}</span>
           </div>
 
-          <div className="footer-links-col">
-            <a href="#hero" className="footer-link">HOME</a>
-            <a href="#about" className="footer-link">ABOUT</a>
-            <a href="#projects" className="footer-link">PROJECTS</a>
-            <a href="#skills" className="footer-link">SKILLS</a>
-            <a href="#contact" className="footer-link">CONTACT</a>
-          </div>
-
-          <div className="footer-social-col">
-            <a href={github} target="_blank" rel="noopener noreferrer" className="footer-icon-btn" title="GitHub">
-              <Icon name="Github" size={16} />
+          <div className="footer-social-links">
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-icon-link"
+              title="GitHub"
+              aria-label="GitHub Profile"
+            >
+              <Icon name="Github" size={18} />
             </a>
-            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="footer-icon-btn" title="LinkedIn">
-              <Icon name="Linkedin" size={16} />
+            <a
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-icon-link"
+              title="LinkedIn"
+              aria-label="LinkedIn Profile"
+            >
+              <Icon name="Linkedin" size={18} />
             </a>
-            <a href={`mailto:${email}`} className="footer-icon-btn" title="Email">
-              <Icon name="Mail" size={16} />
+            <a
+              href={`mailto:${email}`}
+              className="footer-icon-link"
+              title="Email"
+              aria-label="Email Me"
+            >
+              <Icon name="Mail" size={18} />
             </a>
           </div>
         </div>
 
+        <div className="footer-divider"></div>
+
         <div className="footer-bottom">
-          <span className="copyright-text">
+          <p className="copyright-text">
             © {currentYear} {fullName}. All rights reserved.
-          </span>
-          <span className="footer-location">Palakollu, Andhra Pradesh, India</span>
+          </p>
+
+          <p className="built-with-text">
+            <span>Built with React</span>
+          </p>
         </div>
       </div>
 
       <style>{`
         .footer-section {
-          padding: 4rem 0 3rem;
-          background: var(--bg-primary);
+          background: var(--bg-secondary);
           border-top: 1px solid var(--border-color);
-          position: relative;
+          padding: 2.5rem 0 1.75rem;
+          margin-top: 4rem;
         }
 
-        .footer-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 2rem;
-          padding-bottom: 2.5rem;
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .footer-brand-col {
+        .footer-container {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          max-width: 380px;
+          gap: 1.25rem;
+        }
+
+        .footer-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
         }
 
         .footer-brand {
-          font-size: 1.4rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .footer-brand-name {
           font-weight: 700;
+          font-size: 1.05rem;
           color: var(--text-primary);
         }
 
-        .footer-tagline {
-          font-size: 0.875rem;
-          color: var(--text-secondary);
-        }
-
-        .footer-links-col {
+        .footer-social-links {
           display: flex;
-          gap: 1.25rem;
-          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.65rem;
         }
 
-        .footer-link {
-          text-decoration: none;
-          color: var(--text-secondary);
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-          color: var(--text-primary);
-        }
-
-        .footer-social-col {
-          display: flex;
-          gap: 0.75rem;
-        }
-
-        .footer-icon-btn {
+        .footer-icon-link {
           display: flex;
           align-items: center;
           justify-content: center;
           width: 36px;
           height: 36px;
-          border-radius: var(--radius-sm);
+          border-radius: var(--radius-md);
           background: var(--bg-card);
           border: 1px solid var(--border-color);
           color: var(--text-secondary);
@@ -120,20 +114,31 @@ export const Footer = () => {
           transition: all 0.2s ease;
         }
 
-        .footer-icon-btn:hover {
-          border-color: var(--text-primary);
-          color: var(--text-primary);
+        .footer-icon-link:hover {
+          color: var(--text-accent);
+          border-color: var(--accent-blue);
+          transform: translateY(-1px);
+        }
+
+        .footer-divider {
+          height: 1px;
+          background: var(--border-color);
+          width: 100%;
         }
 
         .footer-bottom {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding-top: 1.75rem;
-          font-size: 0.8rem;
-          color: var(--text-muted);
           flex-wrap: wrap;
-          gap: 0.75rem;
+          gap: 1rem;
+          font-size: 0.85rem;
+          color: var(--text-muted);
+        }
+
+        .built-with-text {
+          font-weight: 500;
+          color: var(--text-secondary);
         }
       `}</style>
     </footer>

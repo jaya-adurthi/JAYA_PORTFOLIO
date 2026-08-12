@@ -17,8 +17,7 @@ export const HireMe = () => {
       <div className="container">
         <div className="hire-me-wrapper glass-card">
           <div className="hire-me-header">
-            <span className="section-label">CAREER OPPORTUNITIES</span>
-            <h2 className="section-title font-serif">Hire Me</h2>
+            <h2 className="section-title">Hire Me</h2>
             <p className="hire-me-text">
               I'm currently looking for software development opportunities and internships where I can apply my skills, build real-world solutions, and continue learning.
             </p>
@@ -30,8 +29,8 @@ export const HireMe = () => {
               onClick={handleScrollToContact}
               className="btn btn-primary hire-primary-btn"
             >
-              <Icon name="Mail" size={16} />
-              <span>GET IN TOUCH</span>
+              <Icon name="Mail" size={18} />
+              <span>Get In Touch</span>
             </button>
 
             <div className="hire-social-links">
@@ -41,8 +40,8 @@ export const HireMe = () => {
                 rel="noopener noreferrer"
                 className="btn btn-secondary btn-sm"
               >
-                <Icon name="Github" size={14} />
-                <span>GITHUB</span>
+                <Icon name="Github" size={16} />
+                <span>GitHub</span>
               </a>
 
               <a
@@ -51,16 +50,16 @@ export const HireMe = () => {
                 rel="noopener noreferrer"
                 className="btn btn-secondary btn-sm"
               >
-                <Icon name="Linkedin" size={14} />
-                <span>LINKEDIN</span>
+                <Icon name="Linkedin" size={16} />
+                <span>LinkedIn</span>
               </a>
 
               <a
                 href={`mailto:${email}`}
                 className="btn btn-secondary btn-sm"
               >
-                <Icon name="Mail" size={14} />
-                <span>EMAIL</span>
+                <Icon name="Mail" size={16} />
+                <span>Email</span>
               </a>
             </div>
           </div>
@@ -73,31 +72,31 @@ export const HireMe = () => {
         }
 
         .hire-me-wrapper {
-          max-width: 860px;
+          max-width: 850px;
           margin: 0 auto;
           text-align: center;
-          padding: 3.5rem 2rem;
+          padding: 3rem 2rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 2.25rem;
+          gap: 2rem;
           background: var(--bg-card);
           border: 1px solid var(--border-color);
+          border-radius: var(--radius-lg);
         }
 
         .hire-me-header {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .hire-me-text {
           font-size: 1.1rem;
           color: var(--text-secondary);
-          max-width: 640px;
-          line-height: 1.7;
-          margin-top: 0.5rem;
+          max-width: 620px;
+          line-height: 1.65;
         }
 
         .hire-me-actions {
@@ -109,7 +108,8 @@ export const HireMe = () => {
         }
 
         .hire-primary-btn {
-          padding: 0.9rem 2.25rem;
+          padding: 0.85rem 2rem;
+          font-size: 1rem;
         }
 
         .hire-social-links {

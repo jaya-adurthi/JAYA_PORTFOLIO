@@ -1,33 +1,40 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
+import { Icon } from './Icons';
 
 export const Skills = () => {
-  const { skills } = portfolioData;
+  const techSkills = [
+    { name: 'Python', icon: 'Code', desc: 'Core Programming & AI Scripting' },
+    { name: 'Java', icon: 'Terminal', desc: 'Object-Oriented Fundamentals' },
+    { name: 'JavaScript', icon: 'FileCode', desc: 'Web App & ES6 Logic' },
+    { name: 'React.js', icon: 'Globe', desc: 'Frontend Framework & UI Components' },
+    { name: 'HTML', icon: 'Code', desc: 'Semantic Web Structure' },
+    { name: 'CSS', icon: 'Layers', desc: 'Modern Layouts & Styling' },
+    { name: 'SQL', icon: 'Database', desc: 'Relational Database Queries' },
+    { name: 'Streamlit', icon: 'Cpu', desc: 'Interactive AI & ML Web Apps' },
+    { name: 'Git', icon: 'Wrench', desc: 'Version Control System' },
+    { name: 'GitHub', icon: 'Github', desc: 'Repository Management & Collaboration' }
+  ];
 
   return (
     <section id="skills" className="section skills-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">MY TOOLBELT</span>
-          <h2 className="section-title font-serif">Technical Skills</h2>
+          <h2 className="section-title">Skills & Tech Stack</h2>
           <p className="section-subtitle">
-            Core technologies, programming languages, and modern tools utilized in application development.
+            Technologies, programming languages, and tools I use to build applications.
           </p>
         </div>
 
-        {/* Editorial Category Grid */}
-        <div className="skills-editorial-grid">
-          {skills.map((skillGroup, groupIdx) => (
-            <div key={groupIdx} className="skills-category-column glass-card">
-              <h3 className="category-title font-serif">{skillGroup.category}</h3>
-              <ul className="editorial-tech-list">
-                {skillGroup.items.map((item) => (
-                  <li key={item} className="editorial-tech-item">
-                    <span className="tech-bullet">—</span>
-                    <span className="tech-name">{item}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="skills-tech-grid">
+          {techSkills.map((tech) => (
+            <div key={tech.name} className="glass-card skill-tech-card">
+              <div className="tech-icon-box">
+                <Icon name={tech.icon} size={22} />
+              </div>
+              <div className="tech-details">
+                <h3 className="tech-name">{tech.name}</h3>
+                <span className="tech-desc">{tech.desc}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -38,61 +45,72 @@ export const Skills = () => {
           position: relative;
         }
 
-        .skills-editorial-grid {
+        .skills-tech-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.5rem;
+          gap: 1.15rem;
         }
 
-        @media (min-width: 768px) {
-          .skills-editorial-grid {
+        @media (min-width: 576px) {
+          .skills-tech-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
         @media (min-width: 992px) {
-          .skills-editorial-grid {
-            grid-template-columns: repeat(4, 1fr);
+          .skills-tech-grid {
+            grid-template-columns: repeat(5, 1fr);
           }
         }
 
-        .skills-category-column {
+        .skill-tech-card {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
-          padding: 1.75rem;
+          align-items: flex-start;
+          gap: 0.85rem;
+          padding: 1.25rem;
+          height: 100%;
+          border: 1px solid var(--border-color);
+          background: var(--bg-card);
+          border-radius: var(--radius-md);
+          transition: all 0.25s ease;
         }
 
-        .category-title {
-          font-size: 1.25rem;
-          color: var(--text-primary);
-          padding-bottom: 0.5rem;
-          border-bottom: 1px solid var(--border-color);
+        .skill-tech-card:hover {
+          background: var(--bg-card-hover);
+          border-color: var(--accent-blue);
+          transform: translateY(-3px);
+          box-shadow: var(--shadow-md);
         }
 
-        .editorial-tech-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0.65rem;
-        }
-
-        .editorial-tech-item {
+        .tech-icon-box {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          font-size: 0.95rem;
-          color: var(--text-secondary);
+          justify-content: center;
+          width: 42px;
+          height: 42px;
+          border-radius: var(--radius-md);
+          background: rgba(37, 99, 235, 0.1);
+          border: 1px solid rgba(37, 99, 235, 0.2);
+          color: var(--text-accent);
         }
 
-        .tech-bullet {
-          color: var(--text-accent);
-          font-weight: 400;
+        .tech-details {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
         }
 
         .tech-name {
+          font-size: 1.05rem;
+          font-weight: 700;
           color: var(--text-primary);
-          font-weight: 500;
+        }
+
+        .tech-desc {
+          font-size: 0.775rem;
+          color: var(--text-muted);
+          line-height: 1.3;
         }
       `}</style>
     </section>

@@ -9,10 +9,9 @@ export const GithubShowcase = () => {
     <section id="github" className="section github-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">OPEN SOURCE & REPOSITORIES</span>
-          <h2 className="section-title font-serif">GitHub Profile</h2>
+          <h2 className="section-title">GitHub</h2>
           <p className="section-subtitle">
-            Explore my public repositories, project codebases, and development activity.
+            Explore my coding journey, repositories and open-source work.
           </p>
         </div>
 
@@ -25,20 +24,19 @@ export const GithubShowcase = () => {
           >
             <div className="github-card-content">
               <div className="github-icon-circle">
-                <Icon name="Github" size={28} />
+                <Icon name="Github" size={32} />
               </div>
 
               <div className="github-info">
-                <span className="github-handle">@jaya-adurthi</span>
-                <h3 className="github-username font-serif">jaya-adurthi</h3>
+                <h3 className="github-username">jaya-adurthi</h3>
                 <p className="github-tagline">
                   Public repositories for web apps, student portals, and AI sustainability tools.
                 </p>
               </div>
 
               <div className="btn btn-primary github-action-btn">
-                <span>VIEW GITHUB</span>
-                <Icon name="ExternalLink" size={14} />
+                <span>View My GitHub</span>
+                <Icon name="ExternalLink" size={16} />
               </div>
             </div>
           </a>
@@ -47,25 +45,28 @@ export const GithubShowcase = () => {
 
       <style>{`
         .github-section {
+          background: rgba(17, 24, 39, 0.4);
           position: relative;
         }
 
         .github-card-wrapper {
-          max-width: 860px;
+          max-width: 800px;
           margin: 0 auto;
         }
 
         .github-showcase-card {
           display: block;
           text-decoration: none;
-          padding: 2.5rem;
+          padding: 2.25rem;
           border: 1px solid var(--border-color);
           background: var(--bg-card);
           transition: all 0.3s ease;
+          border-radius: var(--radius-lg);
         }
 
         .github-showcase-card:hover {
-          border-color: var(--border-dark);
+          transform: translateY(-4px);
+          border-color: var(--accent-blue);
           box-shadow: var(--shadow-md);
         }
 
@@ -74,18 +75,18 @@ export const GithubShowcase = () => {
           align-items: center;
           justify-content: space-between;
           flex-wrap: wrap;
-          gap: 1.75rem;
+          gap: 1.5rem;
         }
 
         .github-icon-circle {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 56px;
-          height: 56px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background: rgba(37, 99, 235, 0.1);
+          border: 1px solid rgba(37, 99, 235, 0.25);
           color: var(--text-primary);
           flex-shrink: 0;
         }
@@ -95,27 +96,19 @@ export const GithubShowcase = () => {
           min-width: 250px;
           display: flex;
           flex-direction: column;
-          gap: 0.25rem;
-        }
-
-        .github-handle {
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--text-accent);
+          gap: 0.35rem;
         }
 
         .github-username {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-size: 1.35rem;
+          font-weight: 700;
           color: var(--text-primary);
         }
 
         .github-tagline {
           font-size: 0.95rem;
           color: var(--text-secondary);
-          line-height: 1.55;
+          line-height: 1.5;
         }
 
         .github-action-btn {

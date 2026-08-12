@@ -24,8 +24,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           title="Scroll to Home"
           aria-label="Scroll to Home"
         >
-          <Icon name="Globe" size={16} />
-          <span className="dock-label">HOME</span>
+          <Icon name="Globe" size={18} />
+          <span className="dock-label">Home</span>
         </a>
 
         <div className="dock-divider"></div>
@@ -39,8 +39,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           title="GitHub Profile"
           aria-label="GitHub Profile"
         >
-          <Icon name="Github" size={16} />
-          <span className="dock-label">GITHUB</span>
+          <Icon name="Github" size={18} />
+          <span className="dock-label">GitHub</span>
         </a>
 
         {/* 3. LinkedIn Link */}
@@ -52,8 +52,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           title="LinkedIn Profile"
           aria-label="LinkedIn Profile"
         >
-          <Icon name="Linkedin" size={16} />
-          <span className="dock-label">LINKEDIN</span>
+          <Icon name="Linkedin" size={18} />
+          <span className="dock-label">LinkedIn</span>
         </a>
 
         {/* 4. Email Link */}
@@ -63,8 +63,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           title="Send Email"
           aria-label="Send Email"
         >
-          <Icon name="Mail" size={16} />
-          <span className="dock-label">EMAIL</span>
+          <Icon name="Mail" size={18} />
+          <span className="dock-label">Email</span>
         </a>
 
         <div className="dock-divider"></div>
@@ -77,8 +77,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
           aria-label="Toggle theme mode"
         >
-          <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={16} />
-          <span className="dock-label">THEME</span>
+          <Icon name={theme === 'dark' ? "Sun" : "Moon"} size={18} />
+          <span className="dock-label">Theme</span>
         </button>
       </div>
 
@@ -103,7 +103,7 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           border-radius: var(--radius-full);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          box-shadow: var(--shadow-md);
+          box-shadow: var(--shadow-lg);
         }
 
         .dock-item {
@@ -114,9 +114,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
           border-radius: var(--radius-full);
           text-decoration: none;
           color: var(--text-secondary);
-          font-size: 0.75rem;
+          font-size: 0.825rem;
           font-weight: 600;
-          letter-spacing: 0.08em;
           transition: all 0.2s ease;
           background: transparent;
           border: none;
@@ -124,8 +123,8 @@ export const BottomDock = ({ theme, toggleTheme }) => {
         }
 
         .dock-item:hover {
-          color: var(--text-primary);
-          background: rgba(0, 0, 0, 0.04);
+          color: var(--text-accent);
+          background: rgba(37, 99, 235, 0.12);
         }
 
         .dock-label {
@@ -140,7 +139,7 @@ export const BottomDock = ({ theme, toggleTheme }) => {
 
         .dock-divider {
           width: 1px;
-          height: 18px;
+          height: 20px;
           background: var(--border-color);
           margin: 0 0.15rem;
         }
