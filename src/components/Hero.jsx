@@ -112,24 +112,6 @@ export const Hero = () => {
               <span>Email</span>
             </a>
           </div>
-
-          {/* Quick info highlights */}
-          <div className="hero-highlights">
-            <div className="highlight-item">
-              <span className="highlight-val">B.Tech CSE</span>
-              <span className="highlight-label">Final Year Student</span>
-            </div>
-            <div className="highlight-divider"></div>
-            <div className="highlight-item">
-              <span className="highlight-val">8.26</span>
-              <span className="highlight-label">CGPA</span>
-            </div>
-            <div className="highlight-divider"></div>
-            <div className="highlight-item">
-              <span className="highlight-val">Palakollu, AP</span>
-              <span className="highlight-label">Location</span>
-            </div>
-          </div>
         </div>
 
         {/* Right Column - Clean Professional Profile Picture & Available for Work Badge */}
@@ -256,7 +238,6 @@ export const Hero = () => {
           display: flex;
           align-items: center;
           gap: 1rem;
-          margin-bottom: 2.25rem;
           flex-wrap: wrap;
         }
 
@@ -279,53 +260,6 @@ export const Hero = () => {
           color: var(--text-accent);
           border-color: var(--accent-blue);
           transform: translateY(-1px);
-        }
-
-        .hero-highlights {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          padding: 0.85rem 1.25rem;
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--radius-md);
-          width: 100%;
-          max-width: 580px;
-        }
-
-        @media (max-width: 576px) {
-          .hero-highlights {
-            flex-direction: column;
-            gap: 0.75rem;
-            align-items: flex-start;
-          }
-          .highlight-divider {
-            display: none;
-          }
-        }
-
-        .highlight-item {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .highlight-val {
-          font-weight: 700;
-          font-size: 1.05rem;
-          color: var(--text-primary);
-        }
-
-        .highlight-label {
-          font-size: 0.75rem;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .highlight-divider {
-          width: 1px;
-          height: 28px;
-          background: var(--border-color);
         }
 
         /* Profile Visual styling */
