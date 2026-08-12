@@ -6,63 +6,34 @@ export const portfolioData = {
     location: "Palakollu, Andhra Pradesh, India",
     email: "jayaadurthi2784@gmail.com",
     phone: "+91 9640844954",
-    profileImg: "/profile.jpg",
-    resumePdf: "/resume.pdf",
-    summary:
-      "Final-year Computer Science Engineering student passionate about software development, problem solving, and building practical real-world applications.",
-    aboutParagraphs: [
-      "I am a final-year Computer Science Engineering student at Swarnandhra College of Engineering and Technology with a strong interest in software engineering and frontend web development.",
-      "My core technical foundation includes Python, Web Development (React, JavaScript, HTML, CSS), and AI-powered practical applications. I enjoy tackling complex challenges, writing clean code, and continuously expanding my technical skillset.",
-      "Whether developing responsive web platforms like SCET Connect or AI assistants for sustainability and code generation, I focus on creating reliable, practical solutions that deliver immediate value."
-    ],
     github: "https://github.com/jaya-adurthi",
-    linkedin: "https://www.linkedin.com/in/adurthi-jaya-lakshmi-durga-776281322"
+    linkedin: "https://www.linkedin.com/in/adurthi-jaya-lakshmi-durga-776281322",
+    resumePdf: "/resume.pdf",
+    profileImg: "/profile.jpg",
+    summary: "Computer Science Engineer specializing in modern frontend development, intuitive web platforms, and practical AI applications. Focused on building responsive, high-performance web experiences with React, JavaScript, and Python.",
+    aboutParagraphs: [
+      "I am a final-year Computer Science and Engineering student at Swarnandhra College of Engineering and Technology, driven by a passion for frontend engineering, software design, and modern web architectures.",
+      "With hands-on experience in React.js, Python, JavaScript, and AI tool integration, I build scalable web applications that bridge clean user interfaces with practical problem solving.",
+      "I thrive on transforming complex ideas into intuitive web platforms, constantly refining my skills in software architecture, algorithm design, and modern frontend frameworks."
+    ]
   },
-
-  education: {
-    degree: "B.Tech in Computer Science and Engineering",
-    college: "Swarnandhra College of Engineering and Technology",
-    duration: "2023 – 2027",
-    cgpa: "8.26 / 10",
-    location: "Seetharampuram, Andhra Pradesh"
-  },
-
-  experience: [
-    {
-      role: "AI for Sustainability Intern",
-      company: "1M1B",
-      duration: "May 2026 – June 2026",
-      type: "Internship",
-      description:
-        "Worked on an AI-powered waste classification and disposal recommendation system using Python and Streamlit.",
-      highlights: [
-        "Focused on AI-based waste classification into eco-friendly categories.",
-        "Engineered disposal recommendation flows for sustainable waste management.",
-        "Built interactive front-end interfaces using Streamlit for instant user recommendations."
-      ]
-    }
-  ],
 
   skills: [
     {
-      category: "Programming & Languages",
-      icon: "Code",
-      items: ["Python", "Java", "JavaScript"]
+      category: "Languages",
+      items: ["Python", "JavaScript (ES6+)", "C", "SQL"]
     },
     {
-      category: "Web Development",
-      icon: "Globe",
-      items: ["React.js", "HTML", "CSS", "Streamlit"]
+      category: "Frontend Development",
+      items: ["React.js", "HTML5", "CSS3", "Vite"]
     },
     {
-      category: "Database & Backend",
-      icon: "Database",
-      items: ["SQL"]
+      category: "Frameworks & AI",
+      items: ["Streamlit", "AI Integrations", "Python Scripting"]
     },
     {
-      category: "Tools & Platforms",
-      icon: "Wrench",
-      items: ["Git", "GitHub"]
+      category: "Developer Tools",
+      items: ["Git", "GitHub", "VS Code"]
     }
   ],
 
@@ -71,43 +42,63 @@ export const portfolioData = {
       id: "scet-connect",
       title: "SCET Connect",
       subtitle: "College Student Portal",
-      description:
-        "A responsive college student portal for Swarnandhra College of Engineering and Technology with student login, branch and section selection, daily class schedules, college information and student-focused campus services.",
-      techStack: ["React.js", "JavaScript", "HTML", "CSS", "Vite", "Vercel"],
-      githubUrl: "https://github.com/jaya-adurthi/SCET_CONNECT",
-      liveUrl: "https://scetconnect.vercel.app/",
-      demoVideoUrl: "/scet-connect-demo.mp4",
+      description: "A comprehensive college portal engineered for SCET students to access daily branch schedules, academic notices, and essential campus services through a streamlined React user interface.",
       bannerImg: "/scet-connect-banner.jpg",
-      liveButtonText: "Live Website",
+      techStack: ["React.js", "JavaScript", "HTML5", "CSS3", "Vite", "Vercel"],
+      liveUrl: "https://scetconnect.vercel.app/",
+      githubUrl: "https://github.com/jaya-adurthi/SCET_CONNECT",
+      demoVideoUrl: "/scet-connect-demo.mp4",
+      liveButtonText: "LIVE WEBSITE",
       featured: true
     },
     {
       id: "code-buddy",
       title: "Code Buddy",
       subtitle: "AI Coding Assistant",
-      description:
-        "An AI-powered coding assistant that helps students generate code, understand existing code, explain programming concepts, debug errors and improve their solutions.",
-      techStack: ["Python", "Streamlit", "AI", "Google Colab"],
-      githubUrl: "https://github.com/jaya-adurthi/Code-Buddy",
-      liveUrl: null,
-      demoVideoUrl: "/code-buddy-demo.mp4",
+      description: "An intelligent AI-powered development companion built with Python and Streamlit that assists programmers with real-time code generation, syntax debugging, logic explanation, and language conversion.",
       bannerImg: "/code-buddy-banner.jpg",
-      liveButtonText: "Live Demo",
-      featured: false
+      techStack: ["Python", "Streamlit", "AI Models", "Google Colab"],
+      liveUrl: null,
+      githubUrl: "https://github.com/jaya-adurthi/Code-Buddy",
+      demoVideoUrl: "/code-buddy-demo.mp4",
+      liveButtonText: "LIVE DEMO",
+      featured: true
     },
     {
       id: "ai-food-waste",
       title: "AI Food Waste Reduction Assistant",
-      subtitle: "AI-Powered Sustainable Waste Management",
-      description:
-        "An AI-powered application that helps users classify waste and receive appropriate disposal recommendations while encouraging sustainable waste management.",
-      techStack: ["Python", "Streamlit", "AI"],
-      githubUrl: "https://github.com/jaya-adurthi/AI-Food-Waste-Reduction-Assistant",
-      liveUrl: "https://ai-food-waste-reduction-assistant-vgy2awxue8ckxxwnqqdnaq.streamlit.app/",
-      demoVideoUrl: "/food-waste-demo.mp4",
+      subtitle: "AI Sustainability Web App",
+      description: "An AI-driven sustainability platform designed to analyze food waste, classify organic items, and generate actionable eco-friendly disposal and composting recommendations.",
       bannerImg: "/food-waste-banner.jpg",
-      liveButtonText: "Live Demo",
-      featured: false
+      techStack: ["Python", "Streamlit", "AI / Machine Learning", "GitHub"],
+      liveUrl: "https://ai-food-waste-reduction-assistant-vgy2awxue8ckxxwnqqdnaq.streamlit.app/",
+      githubUrl: "https://github.com/jaya-adurthi/AI-Food-Waste-Reduction-Assistant",
+      demoVideoUrl: "/food-waste-demo.mp4",
+      liveButtonText: "LIVE DEMO",
+      featured: true
+    }
+  ],
+
+  education: {
+    degree: "B.Tech in Computer Science & Engineering",
+    college: "Swarnandhra College of Engineering and Technology",
+    location: "Seetharampuram, Narsapuram, AP",
+    duration: "2023 – 2027",
+    cgpa: "8.26 / 10"
+  },
+
+  experience: [
+    {
+      role: "AI for Sustainability Intern",
+      company: "1M1B (One Million for One Billion)",
+      duration: "May 2026 – June 2026",
+      type: "Internship",
+      description: "Engaged in building AI-enabled sustainability applications focused on environmental impact, waste management, and intelligent data-driven solutions.",
+      highlights: [
+        "Engineered AI-focused web tools and sustainability solutions during a hands-on technical internship.",
+        "Built responsive user interfaces and integrated Python machine learning models for real-world environmental applications.",
+        "Collaborated on project architecture, code optimization, and user experience design principles."
+      ]
     }
   ]
 };
