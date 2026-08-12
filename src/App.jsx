@@ -6,7 +6,6 @@ import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
 import { GithubShowcase } from './components/GithubShowcase';
-import { Education } from './components/Education';
 import { HireMe } from './components/HireMe';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -37,7 +36,6 @@ function App() {
         <Experience />
         <Projects />
         <GithubShowcase />
-        <Education />
         <HireMe />
         <Contact />
       </main>
